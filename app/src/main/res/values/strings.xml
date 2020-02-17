@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Netti Test</string>
+    <string name="error_load">Ошибка загрузки</string>
+</resources>

@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "ru.guryanov.netitest"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            buildConfigField "String", "DATA_URL", prodApiUrl
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            initWith debug
+            buildConfigField "String", "DATA_URL", devApiUrl
+        }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+
+apply from: '../versions.gradle'
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    implementation kotlin.kotlin
+    implementation kotlin.coreKtx
+
+    implementation support.appcompat
+    implementation support.constraintLayout
+    implementation support.recyclerview
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.1.0-rc01"
+    implementation "androidx.fragment:fragment-ktx:1.1.0-rc01"
+
+
+    implementation room.room
+    kapt room.roomCompiler
+    implementation room.roomCoroutines
+
+
+    implementation okHttp.okhttp
+    implementation retrofit.retrofit
+    implementation retrofit.gson
+
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
