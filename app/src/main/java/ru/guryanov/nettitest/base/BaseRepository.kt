@@ -8,10 +8,7 @@ import ru.guryanov.nettitest.data.entity.Post
 
 open class BaseRepository {
 
-
     protected val dataUrl: String = BuildConfig.DATA_URL
-
-
     open suspend fun <T,K : Any> getRemoteData(entity:Class<K>, api: NettiApi): ServerResponse<T> {
         return try {
             with(entity) {
